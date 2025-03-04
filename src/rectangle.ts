@@ -14,7 +14,7 @@ export default class Rectangle {
        const gap = 200;
 
        //  two rectangles
-       this.scene.add.rectangle(X - rectWidth / 2 - gap / 2, Y, rectWidth, rectHeight, 0x808080);
-       this.scene.add.rectangle(X + rectWidth / 2 + gap / 2, Y, rectWidth, rectHeight, 0x808080);
+       this.scene.add.rectangle(X - rectWidth / 2 - gap / 2, Y, rectWidth, rectHeight, 0x2cda9d);
+       this.scene.add.rectangle(X + rectWidth / 2 + gap / 2, Y, rectWidth, rectHeight, 0x2cda9d);
    }
 }
