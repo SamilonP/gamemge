@@ -1,3 +1,5 @@
+let rectangle: any
+
 import Rectangle from "./rectangle"; 
 class MainGame extends Phaser.Scene {
     constructor () {
@@ -5,17 +7,17 @@ class MainGame extends Phaser.Scene {
     }
 
     preload() {
-
+        this.load.image('flarg', './assets/flarged.png')
     }
 
     create() {
-        const rectangle = new Rectangle(this);
-        rectangle.create();
-        
+        rectangle = new Rectangle(this);
+        rectangle.preload()
+        rectangle.create()
     }
 
     update(elapsed: number, delta: number) {
-        
+        rectangle.move(1)
     }
 }
 
