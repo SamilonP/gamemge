@@ -1,7 +1,7 @@
 import Phaser from 'phaser'
 import MainGame from './game.ts'
 
-var config: Phaser.Types.Core.GameConfig = {
+const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: 1500,
     height: 750,
@@ -14,4 +14,4 @@ var config: Phaser.Types.Core.GameConfig = {
     scene: [MainGame]
 }
 
-var game = new Phaser.Game(config)
+const game = new Phaser.Game(config)

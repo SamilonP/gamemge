@@ -1,20 +1,16 @@
 export default class Player {
- 
-  constructor() {
-  
+   constructor() {
 
-  
-  }
+   }
+   preload() {
+   
+   }
 
-  preload() {
-  
-  }
+   create() {
+   
+   }
 
-  create() {
-  
-  }
+   update() {
 
-  update() {
-
-     }
-  }
+   }
+}

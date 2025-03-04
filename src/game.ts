@@ -1,3 +1,5 @@
+import Player from "./player"
+
 class MainGame extends Phaser.Scene {
     constructor () {
         super("maingame")
