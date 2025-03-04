@@ -1,5 +1,6 @@
 import Phaser from 'phaser'
 import MainGame from './game.ts'
+
 const config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
     width: 1500,
