@@ -1,23 +1,17 @@
 import Phaser from 'phaser'
-import './style.css'
+import MainGame from './game.ts'
 
-
-const config: Phaser.Types.Core.GameConfig = {
+var config: Phaser.Types.Core.GameConfig = {
     type: Phaser.AUTO,
-    width: 320 * 1.5,
-    height: 480 * 1.5,
-    parent: 'app',
-    scene: [
-        
-    ],
+    width: 1500,
+    height: 750,
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: { x: 0, y: 900 },
-            debug: false
+            gravity: { x: 0, y: 900}
         }
-    }
+    },
+    scene: [MainGame]
 }
-    
-// @ts-ignore
-const game = new Game(config)
+
+var game = new Phaser.Game(config)
