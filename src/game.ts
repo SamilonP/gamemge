@@ -7,13 +7,14 @@ constructor () {
         super("maingame")
     }
 
-preload() {
+    preload() {
         this.load.image('flarg', './assets/flarged.png')
     }
 
 create() {
     const centerX = this.cameras.main.width / 2;
 
+    create() {
         rectangle = new Rectangle(this)
         rectangle.preload()
         rectangle.create()
@@ -29,7 +30,7 @@ create() {
 
         const scoreText = new Phaser.GameObjects.Text(this, centerX, 30, "Score: " + score, 
         {
-         fontFamily: "Consolas",
+        fontFamily: "Consolas",
         fontSize: "48px",
         fontStyle: "bold",
          color: "white",
@@ -37,7 +38,7 @@ create() {
         this.add.existing(scoreText)
     }
 
-update(elapsed: number, delta: number) {
+    update(elapsed: number, delta: number) {
         rectangle.move(delta)
     }
 }
