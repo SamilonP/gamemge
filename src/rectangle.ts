@@ -14,6 +14,7 @@ export default class Rectangle {
     }
  
     create() {
+     
         const X = this.scene.cameras.main.width / 2;
         const Y = this.scene.cameras.main.height / 2;
     
@@ -28,8 +29,6 @@ export default class Rectangle {
 
         this.scene.physics.add.collider(player, enemy, () => {
             accumulate = -1000
-            player.body.setVelocityX(-player.body.velocity.x)
-            enemy.body.setVelocityX(-enemy.body.velocity.x)
         })
 
         player.body.setAllowGravity(false)
