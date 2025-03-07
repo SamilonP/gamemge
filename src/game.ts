@@ -17,7 +17,7 @@ class MainGame extends Phaser.Scene {
     }
 
     update(elapsed: number, delta: number) {
-        rectangle.move(1)
+        rectangle.move(delta)
     }
 }
 

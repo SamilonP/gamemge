@@ -1,5 +1,6 @@
 let player: any;
 let enemy: any;
+let accumulate = 0;
 
 export default class Rectangle {
     private scene: Phaser.Scene;
@@ -22,14 +23,24 @@ export default class Rectangle {
         //  two rectangles
         player = this.scene.physics.add.sprite(X - rectWidth / 2 - gap / 2, Y, "flarg").setScale(.2)
         enemy = this.scene.physics.add.sprite(X + rectWidth / 2 + gap / 2, Y, "flarg").setScale(.2)
+        
+        player.flipX = true
 
-        player.body.setImmovable(true)
+        this.scene.physics.add.collider(player, enemy, () => {
+            accumulate = -1000
+            player.body.setVelocityX(-player.body.velocity.x)
+            enemy.body.setVelocityX(-enemy.body.velocity.x)
+        })
+
         player.body.setAllowGravity(false)
-        enemy.body.setImmovable(true)
         enemy.body.setAllowGravity(false)
     }
- 
-    move(direction: number) {
-        player.body.x += direction
+    
+    move(delta: number) {
+
+        accumulate += 1 * delta
+
+        player.body.setVelocityX(accumulate)
+        enemy.body.setVelocityX(-accumulate)
     }
 }
