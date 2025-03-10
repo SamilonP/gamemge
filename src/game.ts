@@ -38,7 +38,7 @@ create() {
     }
 
     update(elapsed: number, delta: number) {
-        rectangle.move(delta)
+        rectangle.update(delta)
     }
 }
 
