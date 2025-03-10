@@ -24,17 +24,10 @@ create() {
         fontSize: "32px",
         fontStyle: "bold",
         color: "white",
-        }).setOrigin(0.5);
+        }).setOrigin(0.5)
         this.add.existing(Ttc)
 
-        const scoreText = new Phaser.GameObjects.Text(this, centerX, 30, "Score: " + score, 
-        {
-        fontFamily: "Consolas",
-        fontSize: "48px",
-        fontStyle: "bold",
-         color: "white",
-        }).setOrigin(0.5);
-        this.add.existing(scoreText)
+      
     }
 
     update(elapsed: number, delta: number) {
