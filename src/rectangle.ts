@@ -28,14 +28,20 @@ export default class Rectangle {
         player.flipX = true
 
         this.scene.physics.add.collider(player, enemy, () => {
-            accumulate = -1000
+            accumulate = -100
         })
 
         player.body.setAllowGravity(false)
         enemy.body.setAllowGravity(false)
     }
     
-    move(delta: number) {
+    update(delta: number) {
+
+        this.scene.input.on('pointerdown', function() {
+            if (player.body.x > 540) {
+                accumulate = -1000
+            }
+        })
 
         accumulate += 1 * delta
 

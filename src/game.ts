@@ -18,25 +18,25 @@ constructor () {
 
         const Ttc = new Phaser.GameObjects.Text(this, 200, 100, "Time the click", 
         {
-        fontFamily: "Consolas",
-        fontSize: "32px",
-        fontStyle: "bold",
-        color: "white",
+            fontFamily: "Consolas",
+            fontSize: "32px",
+            fontStyle: "bold",
+            color: "white",
         });
         this.add.existing(Ttc)
 
         const scoreText = new Phaser.GameObjects.Text(this, 230, 20, "Score: " + score, 
         {
-        fontFamily: "Consolas",
-        fontSize: "48px",
-        fontStyle: "bold",
-        color: "white",
+            fontFamily: "Consolas",
+            fontSize: "48px",
+            fontStyle: "bold",
+            color: "white",
         });
         this.add.existing(scoreText)
     }
 
     update(elapsed: number, delta: number) {
-        rectangle.move(delta)
+        rectangle.update(delta)
     }
 }
 
