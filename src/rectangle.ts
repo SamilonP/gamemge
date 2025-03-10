@@ -36,7 +36,6 @@ export default class Rectangle {
     }
     
     update(delta: number) {
-
         this.scene.input.on('pointerdown', function() {
             if (player.body.x > 540) {
                 accumulate = -1000
