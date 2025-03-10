@@ -1,6 +1,7 @@
 let player: any;
 let enemy: any;
 let accumulate = 0;
+let score = 0
 
 export default class Rectangle {
     private scene: Phaser.Scene;
