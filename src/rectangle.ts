@@ -49,6 +49,7 @@ export default class Rectangle {
     }
 
     kill() {
+        console.log("kill")
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
 
