@@ -14,7 +14,6 @@ constructor () {
 create() {
     const centerX = this.cameras.main.width / 2;
 
-    create() {
         rectangle = new Rectangle(this)
         rectangle.preload()
         rectangle.create()
