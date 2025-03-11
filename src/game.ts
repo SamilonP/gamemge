@@ -1,5 +1,4 @@
 let rectangle: any
-let score = 0
 import Rectangle from "./rectangle";
 
 class MainGame extends Phaser.Scene {
