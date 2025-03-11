@@ -5,6 +5,7 @@ let accumulate = 0
 export default class Rectangle {
     private scene: Phaser.Scene
     private score: number = 0 
+    private debounce: boolean = false
     private scoreText!: Phaser.GameObjects.Text 
 
     constructor(scene: Phaser.Scene) {
@@ -69,7 +70,10 @@ export default class Rectangle {
     update(delta: number) {
         this.scene.input.once('pointerdown', () => {
             if (player.x > 100) { 
-                this.score += 1 
+                if (!this.debounce) {
+                    this.score += 1 
+                }
+
                 this.scoreText.setText("Score: " + this.score)
                 accumulate = -1000 
             } else {
@@ -81,5 +85,13 @@ export default class Rectangle {
 
         player.body.setVelocityX(accumulate)
         enemy.body.setVelocityX(-accumulate)
+    }
+
+    initiatedebounce() {
+        this.debounce = true
+
+        this.scene.time.delayedCall(1000, () => {
+            this.debounce = false
+        })
     }
 }
