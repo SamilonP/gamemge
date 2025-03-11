@@ -45,7 +45,7 @@ export default class Rectangle {
         this.scene.add.existing(this.scoreText)
 
         this.scene.input.on('pointerdown', () => {
-            if (Math.abs(player.x - enemy.x) < 250) { 
+            if (Math.abs(player.x - enemy.x) < 200) { 
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
                 accumulate = -700
