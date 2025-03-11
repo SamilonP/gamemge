@@ -19,8 +19,7 @@ export default class Rectangle {
         const screenWidth = this.scene.cameras.main.width
         const screenHeight = this.scene.cameras.main.height
     
-        // Create player and enemy at max distance apart
-        player = this.scene.physics.add.sprite(0 + 50, screenHeight / 2, "flarg").setScale(.5)
+        player = this.scene.physics.add.sprite(50, screenHeight / 2, "flarg").setScale(.5)
         enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
         
         player.flipX = true
@@ -32,7 +31,6 @@ export default class Rectangle {
         player.body.setAllowGravity(false)
         enemy.body.setAllowGravity(false)
         
-        // Score text
         this.scoreText = new Phaser.GameObjects.Text(this.scene, screenWidth / 2, 30, "Score: " + this.score, 
             {
                 fontFamily: "Consolas",
@@ -43,10 +41,19 @@ export default class Rectangle {
         ).setOrigin(0.5)
 
         this.scene.add.existing(this.scoreText)
+
+        this.scene.input.on('pointerdown', () => {
+            if (Math.abs(player.x - enemy.x) < 250) { 
+                this.score += 1  
+                this.scoreText.setText("Score: " + this.score)
+                accumulate = -700
+            } else {
+                this.kill()
+            }
+        })
     }
 
     kill() {
-        console.log("kill")
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
 
@@ -55,8 +62,7 @@ export default class Rectangle {
         const screenWidth = this.scene.cameras.main.width
         const screenHeight = this.scene.cameras.main.height
 
-        // Reset positions to max distance apart
-        player.setPosition(0 + 50, screenHeight / 2)
+        player.setPosition(50, screenHeight / 2)
         enemy.setPosition(screenWidth - 50, screenHeight / 2)
 
         player.body.setVelocityX(0)
@@ -64,19 +70,9 @@ export default class Rectangle {
     }
     
     update(delta: number) {
-        this.scene.input.once('pointerdown', () => {
-            if (player.x > 10) { 
-                this.score += 1 
-                this.scoreText.setText("Score: " + this.score)
-                accumulate = -1000 
-            } else {
-                this.kill()
-            }
-        })
-
-        accumulate += 1 * delta
-
+        accumulate += 0.5 * delta
         player.body.setVelocityX(accumulate)
         enemy.body.setVelocityX(-accumulate)
+
     }
 }
