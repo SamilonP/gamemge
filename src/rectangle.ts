@@ -21,6 +21,8 @@ export default class Rectangle {
     
         player = this.scene.physics.add.sprite(50, screenHeight / 2, "flarg").setScale(.5)
         enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
+        player.body.setSize(200)
+        enemy.body.setSize(200)
         
         player.flipX = true
 
