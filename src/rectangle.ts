@@ -1,9 +1,10 @@
-let player: any
-let enemy: any
-let accumulate = 0
 
 export default class Rectangle {
+    private player: any
+    private splosion: any
+    private enemy: any
     private scene: Phaser.Scene
+    private accumulate = 0
     private score: number = 0 
     private scoreText!: Phaser.GameObjects.Text 
 
@@ -19,19 +20,21 @@ export default class Rectangle {
         const screenWidth = this.scene.cameras.main.width
         const screenHeight = this.scene.cameras.main.height
     
-        player = this.scene.physics.add.sprite(50, screenHeight / 2, "flarg").setScale(.5)
-        enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
-        player.body.setSize(200)
-        enemy.body.setSize(200)
-        
-        player.flipX = true
+        this.splosion = this.scene.add.image(500, 500, 'splode')
 
-        this.scene.physics.add.collider(player, enemy, () => {
+        this.player = this.scene.physics.add.sprite(50, screenHeight / 2, "flarg").setScale(.5)
+        this.enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
+        this.player.body.setSize(200)
+        this.enemy.body.setSize(200)
+        
+        this.player.flipX = true
+
+        this.scene.physics.add.collider(this.player, this.enemy, () => {
             this.kill()
         })
 
-        player.body.setAllowGravity(false)
-        enemy.body.setAllowGravity(false)
+        this.player.body.setAllowGravity(false)
+        this.enemy.body.setAllowGravity(false)
         
         this.scoreText = new Phaser.GameObjects.Text(this.scene, screenWidth / 2, 30, "Score: " + this.score, 
             {
@@ -45,10 +48,10 @@ export default class Rectangle {
         this.scene.add.existing(this.scoreText)
 
         this.scene.input.on('pointerdown', () => {
-            if (Math.abs(player.x - enemy.x) < 250) { 
+            if (Math.abs(this.player.x - this.enemy.x) < 250) { 
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
-                accumulate = -700
+                this.accumulate = -(Math.random() * 800) - 100
             } else {
                 this.kill()
             }
@@ -59,22 +62,22 @@ export default class Rectangle {
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
 
-        accumulate = 0 
+        this.accumulate = 0 
 
         const screenWidth = this.scene.cameras.main.width
         const screenHeight = this.scene.cameras.main.height
 
-        player.setPosition(50, screenHeight / 2)
-        enemy.setPosition(screenWidth - 50, screenHeight / 2)
+        this.player.setPosition(50, screenHeight / 2)
+        this.enemy.setPosition(screenWidth - 50, screenHeight / 2)
 
-        player.body.setVelocityX(0)
-        enemy.body.setVelocityX(0)
+        this.player.body.setVelocityX(0)
+        this.enemy.body.setVelocityX(0)
     }
     
     update(delta: number) {
-        accumulate += 0.5 * delta
-        player.body.setVelocityX(accumulate)
-        enemy.body.setVelocityX(-accumulate)
+        this.accumulate += 0.5 * delta
+        this.player.body.setVelocityX(this.accumulate)
+        this.enemy.body.setVelocityX(-this.accumulate)
 
     }
 }

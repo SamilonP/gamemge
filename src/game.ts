@@ -9,6 +9,7 @@ constructor () {
 
     preload() {
         this.load.image('flarg', './assets/flarged.png')
+        this.load.image('splode', './assets/BOOM.gif')
     }
 
 create() {
