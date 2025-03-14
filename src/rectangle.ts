@@ -8,6 +8,7 @@ export default class Rectangle {
     private score: number = 0 
     private scoreText!: Phaser.GameObjects.Text 
     private boing!: Phaser.Sound.BaseSound 
+    private isAlive: boolean = true
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene
@@ -67,6 +68,7 @@ export default class Rectangle {
     }
     
     kill() {
+        this.isAlive = false // Mark the player as dead
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
         
@@ -80,6 +82,8 @@ export default class Rectangle {
         
         this.player.body.setVelocityX(0)
         this.enemy.body.setVelocityX(0)
+
+        this.isAlive = true // Reset the player's state
     }
     
     update(delta: number) {
