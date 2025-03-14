@@ -8,13 +8,12 @@ constructor () {
 
     preload() {
         this.load.image('flarg', './assets/flarged.png')
-        this.load.image('splode', './assets/BOOM.gif')
+        this.load.spritesheet('splode', './assets/BOOM.png', {frameWidth: 200, frameHeight: 200, })
         this.load.audio("boing", "assets/boing.wav") 
     }
 
 create() {
     const centerX = this.cameras.main.width / 2;
-
         rectangle = new Rectangle(this)
         rectangle.create()
 
