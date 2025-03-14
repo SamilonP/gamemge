@@ -8,6 +8,7 @@ constructor () {
 
     preload() {
         this.load.image('flarg', './assets/flarged.png')
+        this.load.image('splode', './assets/BOOM.gif')
         this.load.audio("boing", "assets/boing.wav") 
     }
 
