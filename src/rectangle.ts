@@ -7,12 +7,11 @@ export default class Rectangle {
     private score: number = 0 
     private scoreText!: Phaser.GameObjects.Text 
     private boing!: Phaser.Sound.BaseSound 
+    private isAlive: boolean = true
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene
     }
- 
-    
  
     create() {
         const screenWidth = this.scene.cameras.main.width
@@ -45,6 +44,8 @@ export default class Rectangle {
         this.scene.add.existing(this.scoreText)
 
         this.scene.input.on('pointerdown', () => {
+            if (!this.isAlive) return; // Prevent actions if the player is dead
+
             if (Math.abs(player.x - enemy.x) < 200) { 
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
@@ -57,6 +58,7 @@ export default class Rectangle {
     }
 
     kill() {
+        this.isAlive = false // Mark the player as dead
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
 
@@ -70,6 +72,8 @@ export default class Rectangle {
 
         player.body.setVelocityX(0)
         enemy.body.setVelocityX(0)
+
+        this.isAlive = true // Reset the player's state
     }
     
     update(delta: number) {
