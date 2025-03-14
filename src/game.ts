@@ -8,13 +8,13 @@ constructor () {
 
     preload() {
         this.load.image('flarg', './assets/flarged.png')
+        this.load.audio("boing", "assets/boing.wav") 
     }
 
 create() {
     const centerX = this.cameras.main.width / 2;
 
         rectangle = new Rectangle(this)
-        rectangle.preload()
         rectangle.create()
 
         const Ttc = new Phaser.GameObjects.Text(this, centerX, 130, "Time the click", 

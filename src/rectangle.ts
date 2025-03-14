@@ -6,19 +6,19 @@ export default class Rectangle {
     private scene: Phaser.Scene
     private score: number = 0 
     private scoreText!: Phaser.GameObjects.Text 
+    private boing!: Phaser.Sound.BaseSound 
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene
     }
  
-    preload() {
-        
-    }
+    
  
     create() {
         const screenWidth = this.scene.cameras.main.width
         const screenHeight = this.scene.cameras.main.height
-    
+        this.boing = this.scene.sound.add("boing")
+
         player = this.scene.physics.add.sprite(50, screenHeight / 2, "flarg").setScale(.5)
         enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
         player.body.setSize(200)
@@ -49,6 +49,7 @@ export default class Rectangle {
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
                 accumulate = -700
+                this.boing.play()
             } else {
                 this.kill()
             }
