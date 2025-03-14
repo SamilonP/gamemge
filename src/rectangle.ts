@@ -49,7 +49,8 @@ export default class Rectangle {
         this.scene.input.on('pointerdown', () => {
             if (!this.isAlive) return; // Prevent actions if the player is dead
 
-            if (Math.abs(this.player.x - this.enemy.x) < 200) { 
+            if (Math.abs(player.x - enemy.x) < 200) { 
+            if (Math.abs(this.player.x - this.enemy.x) < 250) { 
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
                 this.accumulate = -(Math.random() * 800) - 100
@@ -75,8 +76,6 @@ export default class Rectangle {
 
         this.player.body.setVelocityX(0)
         this.enemy.body.setVelocityX(0)
-
-        this.isAlive = true // Reset the player's state
     }
     
     update(delta: number) {
