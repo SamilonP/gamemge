@@ -1,4 +1,3 @@
-
 export default class Rectangle {
     private player: any
     private splosion: any
@@ -27,7 +26,6 @@ export default class Rectangle {
             repeat: 0
         })
 
-        
         this.player = this.scene.physics.add.sprite(50, screenHeight / 2, "flarg").setScale(.5)
         this.enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
         this.player.body.setSize(200)
@@ -59,6 +57,7 @@ export default class Rectangle {
                 splosionSprite.play('playSplosion')
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
+                this.updateScoreColor()
                 this.accumulate = -(Math.random() * 800) - 100
                 this.boing.play()
             } else {
@@ -67,10 +66,27 @@ export default class Rectangle {
         })
     }
     
+    updateScoreColor() {
+        if (this.score < 5) {
+            this.scoreText.setColor("white")
+        } else if (this.score < 10) {
+            this.scoreText.setColor("yellow")
+        } else if (this.score < 20) {
+            this.scoreText.setColor("blue")
+        } else if (this.score < 40) {
+            this.scoreText.setColor("red")
+        } else if (this.score <= 100) {
+            this.scoreText.setColor("purple")
+        } else {
+            this.scoreText.setColor("brown")
+        }
+    }
+
     kill() {
-        this.isAlive = false // Mark the player as dead
+        this.isAlive = false
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
+        this.updateScoreColor()
         
         this.accumulate = 0 
         
@@ -83,13 +99,15 @@ export default class Rectangle {
         this.player.body.setVelocityX(0)
         this.enemy.body.setVelocityX(0)
 
-        this.isAlive = true // Reset the player's state
+        this.isAlive = true 
     }
     
     update(delta: number) {
         this.accumulate += 0.5 * delta
         this.player.body.setVelocityX(this.accumulate)
         this.enemy.body.setVelocityX(-this.accumulate)
-
+        if (this.score === 10) {
+            this.scoreText.setText("Score: " + this.score)
+        }
     }
 }
