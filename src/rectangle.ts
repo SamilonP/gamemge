@@ -17,7 +17,7 @@ export default class Rectangle {
         const screenWidth = this.scene.cameras.main.width
         const screenHeight = this.scene.cameras.main.height
 
-        this.boing = this.scene.sound.add("boing")
+        this.boing = this.scene.sound.add("boing", { volume: 0.5 }) 
 
         this.scene.anims.create({
             key: 'playSplosion',
@@ -28,8 +28,8 @@ export default class Rectangle {
 
         this.player = this.scene.physics.add.sprite(50, screenHeight / 2, "flarg").setScale(.5)
         this.enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
-        this.player.body.setSize(200)
-        this.enemy.body.setSize(200)
+        this.player.body.setSize(100)
+        this.enemy.body.setSize(100)
         
         this.player.flipX = true
         
@@ -40,6 +40,8 @@ export default class Rectangle {
         this.player.body.setAllowGravity(false)
         this.enemy.body.setAllowGravity(false)
         const splosionSprite = this.scene.add.sprite(screenWidth / 2, screenHeight / 2, 'splode')
+        splosionSprite.setVisible(false)
+        splosionSprite.setScale(2)
         
         this.scoreText = new Phaser.GameObjects.Text(this.scene, screenWidth / 2, 30, "Score: " + this.score, 
             {
@@ -53,8 +55,12 @@ export default class Rectangle {
         this.scene.add.existing(this.scoreText)
         
         this.scene.input.on('pointerdown', () => {
-            if (Math.abs(this.player.x - this.enemy.x) < 250) { 
+            if (Math.abs(this.player.x - this.enemy.x) < 230) { 
+                splosionSprite.setVisible(true); 
                 splosionSprite.play('playSplosion')
+                splosionSprite.once('animationcomplete', () => {
+                    splosionSprite.setVisible(false)
+                });
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
                 this.updateScoreColor()
