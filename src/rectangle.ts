@@ -2,7 +2,8 @@ export default class Rectangle {
     private player: any
     private enemy: any
     private scene: Phaser.Scene
-    private accumulate = 0
+    private plrAccumulate = 0
+    private enemyAccumulate = 0
     private score: number = 0 
     private enemyHealth: number = 10
     private scoreText!: Phaser.GameObjects.Text 
@@ -30,7 +31,10 @@ export default class Rectangle {
         this.enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
         this.player.body.setSize(100)
         this.enemy.body.setSize(100)
-        
+        this.player.setCollideWorldBounds(true)
+        this.enemy.setCollideWorldBounds(true)
+
+
         this.player.flipX = true
         
         this.scene.physics.add.collider(this.player, this.enemy, () => {
@@ -64,8 +68,11 @@ export default class Rectangle {
                 this.score += 1  
                 this.scoreText.setText("Score: " + this.score)
                 this.updateScoreColor()
-                this.accumulate = -(Math.random() * 800) - 100
+                this.plrAccumulate = -(Math.random() * 800) - 300
+                this.enemyAccumulate = (Math.random() * 800) + 300
                 this.boing.play()
+
+                this.enemyHealth--
             } else {
                 this.kill()
             }
@@ -94,7 +101,8 @@ export default class Rectangle {
         this.scoreText.setText("Score: " + this.score)
         this.updateScoreColor()
         
-        this.accumulate = 0 
+        this.plrAccumulate = 0 
+        this.enemyAccumulate = 0
         
         const screenWidth = this.scene.cameras.main.width
         const screenHeight = this.scene.cameras.main.height
@@ -109,9 +117,16 @@ export default class Rectangle {
     }
     
     update(delta: number) {
-        this.accumulate += 0.5 * delta
-        this.player.body.setVelocityX(this.accumulate)
-        this.enemy.body.setVelocityX(-this.accumulate)
+        this.plrAccumulate += 0.5 * delta
+        this.enemyAccumulate -= 0.5 * delta
+        this.player.body.setVelocityX(this.plrAccumulate)
+        this.enemy.body.setVelocityX(this.enemyAccumulate)
+
+        if (this.player.body.x <= 0) {
+            this.plrAccumulate *= -1
+            this.player.body.x -= 1
+        }
+
         if (this.score === 10) {
             this.scoreText.setText("Score: " + this.score)
         }
