@@ -58,21 +58,24 @@ export default class Rectangle {
         
         this.scene.input.on('pointerdown', () => {
             if (Math.abs(this.player.x - this.enemy.x) < 230) { 
+                const explosionX = (this.player.x + this.enemy.x) / 2
+                const explosionY = (this.player.y + this.enemy.y) / 2
+                splosionSprite.setPosition(explosionX, explosionY)
                 splosionSprite.setVisible(true); 
-                splosionSprite.play('playSplosion')
+                splosionSprite.play('playSplosion');
                 splosionSprite.once('animationcomplete', () => {
-                    splosionSprite.setVisible(false)
+                    splosionSprite.setVisible(false);
                 });
-                this.score += 1  
+                this.score += 1
                 this.scoreText.setText("Score: " + this.score)
                 this.updateScoreColor()
                 this.plrAccumulate = -(Math.random() * 800) - 300
-                this.enemyAccumulate = (Math.random() * 800) + 3000
+                this.enemyAccumulate = (Math.random() * 800) + 300
                 this.boing.play()
 
-                this.enemyHealth--
+                this.enemyHealth--;
             } else {
-                this.kill()
+                this.kill();
             }
         })
     }
