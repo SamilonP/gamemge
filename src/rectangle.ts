@@ -1,11 +1,11 @@
 
 export default class Rectangle {
     private player: any
-    private splosion: any
     private enemy: any
     private scene: Phaser.Scene
     private accumulate = 0
     private score: number = 0 
+    private enemyHealth: number = 10
     private scoreText!: Phaser.GameObjects.Text 
     private boing!: Phaser.Sound.BaseSound 
     private isAlive: boolean = true
