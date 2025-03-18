@@ -8,7 +8,6 @@ export default class Rectangle {
     private enemyHealth: number = 10
     private scoreText!: Phaser.GameObjects.Text 
     private boing!: Phaser.Sound.BaseSound 
-    private isAlive: boolean = true
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene
@@ -31,8 +30,7 @@ export default class Rectangle {
         this.enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "flarg").setScale(.5)
         this.player.body.setSize(100)
         this.enemy.body.setSize(100)
-        this.player.setCollideWorldBounds(true)
-        this.enemy.setCollideWorldBounds(true)
+        
 
 
         this.player.flipX = true
@@ -99,7 +97,6 @@ export default class Rectangle {
     }
 
     kill() {
-        this.isAlive = false
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
         this.updateScoreColor()
@@ -116,7 +113,6 @@ export default class Rectangle {
         this.player.body.setVelocityX(0)
         this.enemy.body.setVelocityX(0)
 
-        this.isAlive = true 
     }
     
     update(delta: number) {
@@ -125,9 +121,18 @@ export default class Rectangle {
         this.player.body.setVelocityX(this.plrAccumulate)
         this.enemy.body.setVelocityX(this.enemyAccumulate)
 
-        if (this.player.body.x <= 0) {
-            this.plrAccumulate *= -1
-            this.player.body.x -= 1
+        if (this.player.body.x < 0) {
+            this.plrAccumulate *= -.5
+            this.player.body.x = 0
+            this.player.body.setVelocityX(0)
+        } else {
+        }
+
+        if (this.enemy.body.x > this.scene.cameras.main.width - 25) {
+            this.enemyAccumulate *= -.5
+            this.enemy.body.x = this.scene.cameras.main.width - 25
+            this.enemy.body.setVelocityX(0)
+        } else {
         }
 
         if (this.score === 10) {
