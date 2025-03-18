@@ -7,7 +7,9 @@ export default class Rectangle {
     private score: number = 0 
     private enemyHealth: number = 10
     private scoreText!: Phaser.GameObjects.Text 
+    private sessionScoreText!: Phaser.GameObjects.Text 
     private boing!: Phaser.Sound.BaseSound 
+    private highscore: number = 0
 
     constructor(scene: Phaser.Scene) {
         this.scene = scene
@@ -44,7 +46,15 @@ export default class Rectangle {
         const splosionSprite = this.scene.add.sprite(screenWidth / 2, screenHeight / 2, 'splode')
         splosionSprite.setVisible(false)
         splosionSprite.setScale(2)
-        
+
+        this.sessionScoreText = new Phaser.GameObjects.Text(this.scene, screenWidth / 2, 800, "Highscore: " + this.highscore, 
+            {
+                fontFamily: "Consolas",
+                fontSize: "48px",
+                fontStyle: "bold",
+                color: "white",
+            }
+        ).setOrigin(0.5)
         this.scoreText = new Phaser.GameObjects.Text(this.scene, screenWidth / 2, 30, "Score: " + this.score, 
             {
                 fontFamily: "Consolas",
@@ -55,7 +65,8 @@ export default class Rectangle {
         ).setOrigin(0.5)
         
         this.scene.add.existing(this.scoreText)
-        
+        this.scene.add.existing(this.sessionScoreText)
+
         this.scene.input.on('pointerdown', () => {
             if (Math.abs(this.player.x - this.enemy.x) < 230) { 
                 const explosionX = (this.player.x + this.enemy.x) / 2
@@ -97,6 +108,10 @@ export default class Rectangle {
     }
 
     kill() {
+        if (this.score > this.highscore) {
+            this.highscore = this.score
+            this.sessionScoreText.setText("Highscore: " + this.highscore)
+        }
         this.score = 0 
         this.scoreText.setText("Score: " + this.score)
         this.updateScoreColor()
