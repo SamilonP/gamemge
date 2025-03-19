@@ -10,6 +10,9 @@ constructor () {
         this.load.image('flarg', './assets/flarged.png')
         this.load.spritesheet('splode', './assets/BOOM.png', {frameWidth: 200, frameHeight: 200, })
         this.load.audio("boing", "assets/boing.wav") 
+        this.load.image('icedancer', './assets/icedancer.png')
+        this.load.image('wod', './assets/wod.png')
+
     }
 
 create() {
