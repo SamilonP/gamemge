@@ -26,14 +26,14 @@ export default class Rectangle {
         this.scene.anims.create({
             key: 'playSplosion',
             frames: this.scene.anims.generateFrameNames('splode', { start: 0, end: 28}),
-            frameRate: 30,
+            frameRate: 45,
             repeat: 0
         })
 
-        this.player = this.scene.physics.add.sprite(50, screenHeight / 2, "wod").setScale(.2)
-        this.enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "icedancer").setScale(.2)
-        this.player.body.setSize(300)
-        this.enemy.body.setSize(300)
+        this.player = this.scene.physics.add.sprite(50, screenHeight / 2, "wod").setScale(.25)
+        this.enemy = this.scene.physics.add.sprite(screenWidth - 50, screenHeight / 2, "icedancer").setScale(.25)
+        this.player.body.setSize(350)
+        this.enemy.body.setSize(350)
 
         this.player.flipX = true
         
@@ -45,7 +45,7 @@ export default class Rectangle {
         this.enemy.body.setAllowGravity(false)
         const splosionSprite = this.scene.add.sprite(screenWidth / 2, screenHeight / 2, 'splode')
         splosionSprite.setVisible(false)
-        splosionSprite.setScale(1.5)
+        splosionSprite.setScale(1.3)
 
         this.sessionScoreText = new Phaser.GameObjects.Text(this.scene, screenWidth / 2, 800, "Highscore: " + this.highscore, 
             {
