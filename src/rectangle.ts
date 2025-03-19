@@ -45,7 +45,7 @@ export default class Rectangle {
         this.enemy.body.setAllowGravity(false)
         const splosionSprite = this.scene.add.sprite(screenWidth / 2, screenHeight / 2, 'splode')
         splosionSprite.setVisible(false)
-        splosionSprite.setScale(2)
+        splosionSprite.setScale(1.5)
 
         this.sessionScoreText = new Phaser.GameObjects.Text(this.scene, screenWidth / 2, 800, "Highscore: " + this.highscore, 
             {
